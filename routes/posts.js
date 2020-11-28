@@ -2,7 +2,16 @@ const express = require("express");
 const router = express.Router();
 const controller = require('../controllers/posts');
 
-router.get("/:id", controller.getById);
+/**
+ * @swagger
+ * /posts/:
+ *   get:
+ *     description: Returns the post
+ *     responses:
+ *       200:
+ *         description: success
+ */
+router.get("/", controller.getById);
 router.post("/", controller.create);
 
 module.exports = router;

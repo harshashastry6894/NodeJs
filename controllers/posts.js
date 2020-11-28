@@ -2,7 +2,7 @@ const Post = require("../models/Post");
 
 const getById = async (req, res) => {
     try {
-        const response = await Post.findById(req.params.id);
+        const response = await Post.find()
         res.json(response);
     } catch (e) {
         res.json({ message: e });
