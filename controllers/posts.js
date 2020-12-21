@@ -1,6 +1,6 @@
 const Post = require("../models/Post");
 
-const getById = async (req, res) => {
+const getPosts = async (req, res) => {
     try {
         const response = await Post.find()
         res.json(response);
@@ -22,6 +22,6 @@ const create = async (req, res) => {
 };
 
 module.exports = {
-    getById,
+    getPosts,
     create
 }

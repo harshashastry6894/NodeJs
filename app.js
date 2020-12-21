@@ -10,6 +10,7 @@ require('dotenv/config');
 // Module imports
 const log = require('./middlewares/log');
 const postsRoute = require('./routes/posts');
+const trainingRoute = require('./routes/training');
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use(log);
 
 // Routes
 app.use('/posts', postsRoute);
+app.use('./training', trainingRoute);
 
 // Connect to DB
 mongoose.connect(

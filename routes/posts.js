@@ -11,7 +11,8 @@ const controller = require('../controllers/posts');
  *       200:
  *         description: success
  */
-router.get("/", controller.getById);
+router.get("/", controller.getPosts);
+
 router.post("/", controller.create);
 
 module.exports = router;
