@@ -2,10 +2,19 @@ const Grade = require("../models/Grade");
 
 const getGrades = async (req, res) => {
     try {
-        const response = await Grade.findOne()
+        const response = await Grade.find().select('-_id')
         res.json(response);
     } catch (e) {
-        res.json({ message: e });
+        res.send(500).json({ message: e.message });
+    }
+}
+
+const getGradeById = async (req, res) => {
+    try {
+        const response = await Grade.findOne({ student_id: req.params.id }).select('-_id')
+        res.json(response);
+    } catch (e) {
+        res.send(500).json({ message: e.message });
     }
 }
 
@@ -15,13 +24,12 @@ const create = async (req, res) => {
         const response = await grade.save();
         res.json(response);
     } catch (e) {
-        res.sendStatus(500).json({
-            message: e.message,
-        });
+        res.send(500).json({ message: e.message });
     }
 };
 
 module.exports = {
     getGrades,
+    getGradeById,
     create
 }
