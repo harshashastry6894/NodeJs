@@ -11,7 +11,7 @@ const getGrades = async (req, res) => {
 
 const getGradeById = async (req, res) => {
     try {
-        const response = await Grade.findOne({ student_id: req.params.id }).select('-_id')
+        const response = await Grade.findById(req.params.id);
         res.json(response);
     } catch (e) {
         res.send(500).json({ message: e.message });
