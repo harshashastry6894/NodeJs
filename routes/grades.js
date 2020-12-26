@@ -9,4 +9,6 @@ router.get("/:id", controller.getGradeById);
 
 router.post("/", controller.create);
 
+router.delete("/:id", controller.removeGrade);
+
 module.exports = router;

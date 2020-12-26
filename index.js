@@ -6,6 +6,7 @@ const cors = require('cors');
 require('dotenv/config');
 const logger = require('./middlewares/log');
 const gradesRoute = require('./routes/grades');
+const errorHandler = require('./middlewares/error-handler');
 
 // set up dependencies
 const app = express();
@@ -18,6 +19,10 @@ app.use(logger);
 // api routes
 app.use('/grade', gradesRoute);
 
+app.all('*', (req, res, next) => {
+    res.status(404).json({ message: `Can't find ${req.originalUrl} on this server!` });
+});
+
 // Connect to DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -26,6 +31,9 @@ mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedT
         console.log('Error while connecting to database.');
         console.log('Error:', err);
     });
+
+// global error handling
+app.use(errorHandler);
 
 // Listen to server
 const port = process.env.NODE_ENV === 'production' ? (process.env.PORT || 80) : 3000;

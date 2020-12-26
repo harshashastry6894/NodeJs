@@ -1,6 +1,7 @@
 const mangoose = require('mongoose');
 
 const GradeSchema = mangoose.Schema({
+    // _id: { type: Object },
     student_id: {
         type: Number,
         required: true
@@ -10,13 +11,9 @@ const GradeSchema = mangoose.Schema({
         required: true
     },
     scores: [{
-        type: { type: String, required: true },
-        score: { type: Number, required: true },
-    }],
-    title: {
-        type: String,
-        required: true
-    }
+        type: { type: String, required: false },
+        score: { type: Number, required: false },
+    }]
 }, { collection: 'grades' });
 
 module.exports = mangoose.model('grades', GradeSchema);

@@ -1,35 +1,60 @@
 const Grade = require("../models/Grade");
+const { BadRequest } = require("../utility/error");
 
-const getGrades = async (req, res) => {
+const getGrades = async (req, res, next) => {
     try {
         const response = await Grade.find().select('-_id')
         res.json(response);
     } catch (e) {
-        res.send(500).json({ message: e.message });
+        next(e);
     }
 }
 
-const getGradeById = async (req, res) => {
+const getGradeById = async (req, res, next) => {
     try {
-        const response = await Grade.findById(req.params.id);
-        res.json(response);
+        if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+            const response = await Grade.findById(req.params.id);
+            if (!response) {
+                throw new BadRequest('grade not found');
+            }
+            res.json(response);
+        } else {
+            throw new BadRequest('grade not found');
+        }
     } catch (e) {
-        res.send(500).json({ message: e.message });
+        next(e);
     }
 }
 
-const create = async (req, res) => {
+const create = async (req, res, next) => {
     try {
-        const grade = new Grade({ body: req.body.body, permalink: req.body.permalink, author: req.body.author, title: req.body.title });
+        const grade = new Grade({ ...req.body });
         const response = await grade.save();
         res.json(response);
     } catch (e) {
-        res.send(500).json({ message: e.message });
+        next(e);
+    }
+};
+
+const removeGrade = async (req, res, next) => {
+    try {
+        if (req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
+            const response = await Grade.findByIdAndDelete(req.params.id);
+            if (!response) {
+                throw new BadRequest('grade not found');
+            }
+            res.json(response);
+        } else {
+            throw new BadRequest('grade not found');
+        }
+    } catch (e) {
+        next(e);
     }
 };
 
 module.exports = {
     getGrades,
     getGradeById,
+    removeGrade,
     create
 }
