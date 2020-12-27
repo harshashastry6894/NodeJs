@@ -1,7 +1,6 @@
 const mangoose = require('mongoose');
 
 const GradeSchema = mangoose.Schema({
-    // _id: { type: Object },
     student_id: {
         type: Number,
         required: true

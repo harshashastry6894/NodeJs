@@ -3,7 +3,14 @@ const { BadRequest } = require("../utility/error");
 
 const getGrades = async (req, res, next) => {
     try {
+        const perPage = req.query.perPage ? parseInt(req.query.perPage) : 10;
+        const page = req.query.page ? parseInt(req.query.page) : 1;
         const response = await Grade.find().select('-_id')
+            .limit(parseInt(perPage))
+            .skip(parseInt(perPage) * parseInt(page))
+            .sort({
+                student_id: 'asc'
+            })
         res.json(response);
     } catch (e) {
         next(e);
