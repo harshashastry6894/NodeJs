@@ -7,3 +7,4 @@
 7. Google or facebook login
 8. Send mail configuration
 9. payemt gateway implementation
+10. Testing
