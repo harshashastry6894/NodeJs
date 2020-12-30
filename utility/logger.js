@@ -8,11 +8,11 @@ const logger = new winston.createLogger({
     transports: [
         new winston.transports.File({
             level: 'info',
-            filename: './logs/all-logs.log',
+            filename: `./logs/logs-${new Date().toISOString().slice(0, 10)}-0.log`,
             handleExceptions: true,
             json: false,
             maxsize: 5242880, //5MB
-            maxFiles: 5,
+            maxFiles: 30,
             colorize: false
         }),
         new winston.transports.File({
@@ -21,7 +21,7 @@ const logger = new winston.createLogger({
             handleExceptions: true,
             json: false,
             maxsize: 5242880, //5MB
-            maxFiles: 5,
+            maxFiles: 30,
             colorize: false
         }),
         new winston.transports.Console({
@@ -34,12 +34,12 @@ const logger = new winston.createLogger({
     exitOnError: false
 });
 
-logger.stream = { 
-    write: function(message, encoding){ 
-      // use message.trim() to remove empty line between logged lines
-      // https://stackoverflow.com/a/28824464/3109731
-      logger.info(message.trim()); 
-    } 
-  }; 
+logger.stream = {
+    write: function (message, encoding) {
+        // use message.trim() to remove empty line between logged lines
+        // https://stackoverflow.com/a/28824464/3109731
+        logger.info(message.trim());
+    }
+};
 
 module.exports = logger;
