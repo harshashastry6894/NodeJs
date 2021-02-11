@@ -3,12 +3,12 @@ const controller = require('../controllers/grades');
 
 const router = express.Router();
 
-router.get("/", controller.getGrades);
+router.route("/")
+    .get(controller.getGrades)
+    .post(controller.create);
 
-router.get("/:id", controller.getGradeById);
-
-router.post("/", controller.create);
-
-router.delete("/:id", controller.removeGrade);
+router.route("/:id")
+    .get(controller.getGradeById)
+    .delete(controller.removeGrade);
 
 module.exports = router;

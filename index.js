@@ -20,12 +20,12 @@ app.use(cors());
 app.use(morgan("combined", { stream: logger.stream }));
 
 // api routes
-app.use('/grade', gradesRoute)
+app.use('/api/v1/grade', gradesRoute)
 
 // Connect to DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-       logger.info('Connected to database successfully!')
+        logger.info('Connected to database successfully!')
     }).catch((err) => {
         logger.error('Error while connecting to database.');
         logger.error('Error:', err);

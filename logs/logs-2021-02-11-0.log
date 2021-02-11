@@ -1,0 +1,5 @@
+{"message":"Server started and listening on port 3000","level":"info","timestamp":"2021-02-11T11:36:59.554Z"}
+{"message":"Connected to database successfully!","level":"info","timestamp":"2021-02-11T11:37:05.516Z"}
+{"message":"Server started and listening on port 3000","level":"info","timestamp":"2021-02-11T11:38:57.569Z"}
+{"message":"Connected to database successfully!","level":"info","timestamp":"2021-02-11T11:39:03.277Z"}
+{"message":"::1 - - [11/Feb/2021:11:39:03 +0000] \"GET /api/v1/grade HTTP/1.1\" 200 2192 \"-\" \"PostmanRuntime/7.26.10\"","level":"info","timestamp":"2021-02-11T11:39:03.809Z"}
